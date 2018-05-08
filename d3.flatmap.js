@@ -41,7 +41,8 @@ class FlatMap {
         this.map = self.selection
             .append("svg")
             .attr("width", self.cfg.width)
-            .attr("height", self.cfg.height); 
+            .attr("height", self.cfg.height)
+            .style('overflow','visible');
 
         this.map.selectAll("path")
             .data(self.data)
@@ -50,6 +51,33 @@ class FlatMap {
             .attr("d", self.path)
             .attr("fill", self.cfg.fill)
             .attr("fill-opacity", self.cfg.fillopacity)
-            .attr("stroke", self.cfg.stroke);    
+            .attr("stroke", self.cfg.stroke);
     }
+}
+
+function gmap_scale(zoom){
+    var s = {
+        20 :      1128.497220,
+        19 :      2256.994440,
+        18 :      4513.988880,
+        17 :      9027.977761,
+        16 :     18055.955520,
+        15 :     36111.911040,
+        14 :     72223.822090,
+        13 :    144447.644200,
+        12 :    288895.288400,
+        11 :    577790.576700,
+        10 :   1155581.153000,
+         9 :   2311162.307000,
+         8 :   4622324.614000,
+         7 :   9244649.227000,
+         6 :  18489298.450000,
+         5 :  36978596.910000,
+         4 :  73957193.820000,
+         3 : 147914387.600000,
+         2 : 295828775.300000,
+         1 : 591657550.500000,
+    }
+
+    return s[zoom];
 }

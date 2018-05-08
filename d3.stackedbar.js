@@ -135,4 +135,27 @@ class StackedBarChart {
         return this.data;
     }
 
+    resize(){
+        var self = this;
+
+        this.cfg.width = parseInt(this.selection.style('width')) - this.cfg.margin.left - this.cfg.margin.right;
+        this.cfg.separation = this.cfg.width / this.data.length;
+
+        this.svg.attr("viewBox", "0 0 "+(this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)+" "+(this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom))
+            .attr("width", this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)
+
+        this.itemg.attr('transform', function(d, i){
+                return 'translate('+(i*self.cfg.separation)+','+(self.cfg.height-self.cfg.label_space)+')';
+            })
+
+        this.itemg.selectAll('rect').attr('width', self.cfg.separation-1);
+        this.itemg.selectAll('text').attr('y', (self.cfg.separation/2) + 4);
+
+        this.yGrid.call(self.make_y_gridlines()
+            .tickSize(-this.cfg.width)
+            .tickFormat("")
+            .ticks(3, ".0f"))
+
+    }
+
 };
