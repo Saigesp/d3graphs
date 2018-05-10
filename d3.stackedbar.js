@@ -9,7 +9,7 @@ class StackedBarChart {
         this.cfg = {
             'margin': {'top': 10, 'right': 10, 'bottom': 10, 'left': 40},
             'key': 'key',
-            'currentkey': '',
+            'currentkey':'*',
             'keys': [],
             'colors': [],
             'fontsize': '12px',
@@ -102,7 +102,7 @@ class StackedBarChart {
                 })
                 .attr('fill', function(d){
                     var greyColor = self.cfg.greyColorMin + (self.cfg.greyColorStep*n);
-                    return d.name == self.cfg.currentkey ? self.cfg.colors[n] : 'rgb('+greyColor+','+greyColor+','+greyColor+')'})
+                    return d.name == self.cfg.currentkey || self.cfg.currentkey == '*' ? self.cfg.colors[n] : 'rgb('+greyColor+','+greyColor+','+greyColor+')'})
         })
 
 
