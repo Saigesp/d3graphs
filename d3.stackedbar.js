@@ -12,6 +12,7 @@ class StackedBarChart {
             'currentkey':'*',
             'keys': [],
             'colors': [],
+            'labels': true,
             'fontsize': '12px',
             'greyColorStart': 240,
             'greyColorStep': 15,
@@ -32,9 +33,12 @@ class StackedBarChart {
         this.yAScale = d3.scaleLinear().rangeRound([this.cfg.height, 0]);
 
         this.cfg.separation = this.cfg.width / this.data.length;
+        if(!this.cfg.labels) this.cfg.label_space = 0;
         this.cfg.height = this.cfg.height + this.cfg.label_space;
 
         this.cfg.greyColorMin = this.cfg.greyColorStart - (this.cfg.keys.length * this.cfg.greyColorStep)
+
+        window.addEventListener("resize", function(){self.resize()});
 
         this.initGraph();
     }
@@ -105,20 +109,21 @@ class StackedBarChart {
                     return d.name == self.cfg.currentkey || self.cfg.currentkey == '*' ? self.cfg.colors[n] : 'rgb('+greyColor+','+greyColor+','+greyColor+')'})
         })
 
-
-        var text = this.itemg.append('text')
-            .attr('y', (self.cfg.separation/2) + 4)
-            .attr('x', -5)
-            .attr('class', 'js-label')
-            .attr("transform", "rotate(-90)")
-            .attr('text-anchor', 'end')
-            .style('font-size', self.cfg.fontsize)
-            .style('font-weight', function(d){ return d.name == self.cfg.currentkey ? '700' : '100'; })
-            .style('cursor', 'pointer')
-            .text(function(d){ return d[self.cfg.key]; })
-            .on('click', function(d){
-                window.location = '../'+d._id;
-            })
+        if(this.cfg.labels){
+            var text = this.itemg.append('text')
+                .attr('y', (self.cfg.separation/2) + 4)
+                .attr('x', -5)
+                .attr('class', 'js-label')
+                .attr("transform", "rotate(-90)")
+                .attr('text-anchor', 'end')
+                .style('font-size', self.cfg.fontsize)
+                .style('font-weight', function(d){ return d.name == self.cfg.currentkey ? '700' : '100'; })
+                .style('cursor', 'pointer')
+                .text(function(d){ return d[self.cfg.key]; })
+                .on('click', function(d){
+                    window.location = '../'+d._id;
+                })
+        }
 
     }
 
