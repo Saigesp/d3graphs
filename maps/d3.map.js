@@ -1,4 +1,4 @@
-class PolygonMapEdit {
+class D3Map {
     constructor(selection, data, config = {}) {
         let self = this;
         this.selection = selection;
@@ -9,11 +9,14 @@ class PolygonMapEdit {
         }
 
         this.cfg = {
-            'margin': {'top': 10, 'right': 10, 'bottom': 10, 'left': 40},
+            'margin': {'top': 0, 'right': 0, 'bottom': 0, 'left': 0},
             'lat': 0,
             'lng': 0,
             'zoom': 16,
+            'circlesize': 12,
+            'tileprovider': 'CartoDB.Positron',
         };
+
         this.cfg.width = parseInt(this.selection.style('width')) - this.cfg.margin.left - this.cfg.margin.right,
         this.cfg.height = parseInt(this.selection.style('height'))- this.cfg.margin.top - this.cfg.margin.bottom;
 
@@ -35,8 +38,6 @@ class PolygonMapEdit {
         this.map = L.map('map')
             .setView([self.cfg.lat,self.cfg.lng], self.cfg.zoom);
 
-        this.mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-
         this.map.on("moveend", ()=>{
             this.events.move({
                 lat: this.map.getCenter().lat,
@@ -50,7 +51,7 @@ class PolygonMapEdit {
             maxZoom: 18,
         });
 
-        L.tileLayer.provider('CartoDB.Positron').addTo(this.map);
+        L.tileLayer.provider(self.cfg.tileprovider).addTo(this.map);
         this.map._initPathRoot()    
 
         this.svg = this.selection.append("svg");
@@ -58,38 +59,11 @@ class PolygonMapEdit {
 
     }
 
-    loadGeojson(geojson) {
-        var self = this;
-
-        this.removeGeojsons()
-
-        this.geojsonLayer = L.geoJson(geojson, {
-            onEachFeature: function(feature, layer) { },
-            style: function(d) {
-                return {
-                    'weight':'2px',
-                    'color':'#000000',
-                    'fillColor': 'trasparent',
-                    'fillOpacity': 0
-                };
-            }
-        }).addTo(this.map);
-
-    }
-
-    removeGeojsons() {
-        if(this.geojsonLayer){
-            this.map.removeLayer(this.geojsonLayer);
-        }
-    }
-
-    fitinBounds(zoombounds, options={}){
+    fitBounds(zoombounds, options={}){
         this.map.fitBounds(zoombounds, options)
     }
 
     on(listener, fn){
-        console.log('on in');
         this.events[listener] = fn;
     }
-
 }
