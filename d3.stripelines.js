@@ -8,9 +8,6 @@ class StripeLines{
         this.cfg = {
             'margin': {'top': 10, 'right': 10, 'bottom': 10, 'left': 40},
             'key': 'key',
-/*
-            'keys': [],
-*/
             'colorScale': d3.interpolateRdBu,
         };
 
@@ -54,14 +51,12 @@ class StripeLines{
                 return 'translate('+(i*self.cfg.separation)+',0)';
         })
                 
-
         this.bars = this.itemg.append('rect')
             .attr('height', self.cfg.height)
-            .attr('width', self.cfg.separation)
+            .attr('width', self.cfg.separation +1)
             .attr('fill', function(d) {
                 return self.cScale(+d[self.cfg.key]);
             })
-            
 
     }
 }
