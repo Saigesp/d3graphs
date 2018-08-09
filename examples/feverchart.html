@@ -31,11 +31,11 @@
         console.log(scsv.parse(data));
 
         var grafico = new FeverChart(d3.select('#yearly'), scsv.parse(data), {
-            'keys': ['yearly'],
+            'keys': ['spring', 'summer', 'autumn', 'winter', 'yearly'],
             'datefield': 'year',
             'dateformat': '%Y',
             'ygrid': true,
-            'colors': ['#FF0000']
+            'colors': ['#DDD','#DDD','#DDD','#DDD','#FF0000']
         })
 
     })
