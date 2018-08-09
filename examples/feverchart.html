@@ -1,0 +1,46 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Temp change</title>
+</head>
+
+<body>
+
+    <style>
+        .chart .line {
+            fill: transparent;
+            stroke-width: 2px;
+        }
+        .chart .grid line {
+            opacity: 0.1;
+        }
+        .chart .grid path {
+            fill: transparent;
+            stroke: transparent;
+        }
+    </style>
+
+    <div id="yearly" style="width: 900px; height: 300px;"></div>
+    
+    <script src="../d3.v4.min.js"></script>
+    <script src="../d3.feverchart.js"></script>
+    <script>
+    var scsv = d3.dsvFormat(";");
+
+    d3.text('data/temps.scsv', function(data) {
+        console.log(scsv.parse(data));
+
+        var grafico = new FeverChart(d3.select('#yearly'), scsv.parse(data), {
+            'keys': ['yearly'],
+            'datefield': 'year',
+            'dateformat': '%Y',
+            'ygrid': true,
+            'colors': ['#FF0000']
+        })
+
+    })
+    </script>
+</body>
+
+
+</html>
