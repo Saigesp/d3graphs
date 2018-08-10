@@ -22,12 +22,12 @@
 
     <div id="yearly" style="width: 900px; height: 300px;"></div>
     
-    <script src="../d3.v4.min.js"></script>
-    <script src="../d3.feverchart.js"></script>
+    <script src="../../d3.v4.min.js"></script>
+    <script src="../../d3.feverchart.js"></script>
     <script>
     var scsv = d3.dsvFormat(";");
 
-    d3.text('data/temps.scsv', function(data) {
+    d3.text('temps.scsv', function(data) {
         console.log(scsv.parse(data));
 
         var grafico = new FeverChart(d3.select('#yearly'), scsv.parse(data), {
