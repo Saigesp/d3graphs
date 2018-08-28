@@ -15,6 +15,7 @@ class FeverChart {
             'fontsize': '12px',
             //'greyColorStart': 240,
             //'greyColorStep': 15,
+            'yscaleformat': '.0f',
             'xgrid': false,
             'ygrid': false,
             'datefield': 'date',
@@ -100,7 +101,7 @@ class FeverChart {
                 .call(self.make_y_gridlines()
                     .tickSize(-self.cfg.width)
                     .tickFormat("")
-                    .ticks(3, ".0f"));
+                    .ticks(3, self.cfg.yscaleformat));
         }
 
         // AXIS
@@ -112,7 +113,7 @@ class FeverChart {
         this.g.append("g")
             .attr("class", "axis axis--y")
             .call(d3.axisLeft(self.yScale)
-                .ticks(3, ".0f"));
+                .ticks(3, self.cfg.yscaleformat));
 
         // LINES
         this.lineg = this.g.selectAll(".line--group")
