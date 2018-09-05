@@ -1,0 +1,47 @@
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<style>
+    .chart .grid line {
+        opacity: 0.1;
+    }
+    .chart .grid path {
+        fill: transparent;
+        stroke: transparent;
+    }
+    .label {        
+        font-family: sans-serif;
+        font-size: 12px;
+        cursor: default;
+    }
+    .chart .source {
+        fill: #7a7a7a;
+        font-size: 10px;
+    }
+    .chart .source a {
+        text-decoration: underline;
+    }
+    .chart .title {
+        font-weight: 700;
+    }
+</style>
+<body>
+    <div id="exports" style="width: 960px; height: 280px;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    <script src="d3.barchart.js"></script>
+    <script>
+        d3.csv('clementinesexport.csv', function(data) {
+            var grafico = new BarChart(d3.select('#exports'), data, {
+                'key': 'ton',
+                'label': 'year',
+                'color': '#DD8500',
+                'title': 'Exportaciones de clementinas a EEUU',
+                'source': 'Fuente: <a href="https://www.icex.es/icex/GetDocumento?dDocName=DOC2015504468&urlNoAcceso=/icex/es/registro/iniciar-sesion/index.html?urlDestino=http://www.icex.es/icex/es/navegacion-principal/todos-nuestros-servicios/informacion-de-mercados/sectores/agroalimentarios/documentos/DOC2015504468.html">Instituto Español de comercio Exterior</a>',
+            })
+        })
+    </script>
+</body>
+
+
+</html> 
