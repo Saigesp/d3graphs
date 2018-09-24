@@ -43,6 +43,21 @@
                 d.inicio = d.inicio.substring(0, d.inicio.length - 5);
                 d.fin = d.fin.substring(0, d.fin.length - 5);
             });
+
+            d3.timeFormatDefaultLocale({
+                "decimal": ".",
+                "thousands": ",",
+                "grouping": [3],
+                "currency": ["$", ""],
+                "dateTime": "%a %b %e %X %Y",
+                "date": "%m/%d/%Y",
+                "time": "%H:%M:%S",
+                "periods": ["AM", "PM"],
+                "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "shortDays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                "months": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                "shortMonths": ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+            });
             
             var grafico = new LinearCalendar(d3.select('#exports'), data, {
                 'year': 'anyo',
