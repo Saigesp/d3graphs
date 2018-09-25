@@ -33,6 +33,7 @@ class LinearCalendar{
 
         this.parseTime = d3.timeParse(this.cfg.dateformat);
         this.formatTime = d3.timeFormat(this.cfg.dateformat);
+        this.formatTimeLeg = d3.timeFormat('%d %B');
         this.yScale = d3.scaleBand().rangeRound([0, self.cfg.height]).padding(1);
         this.xScale = d3.scaleTime().range([0, this.cfg.width]);
 
@@ -115,19 +116,23 @@ class LinearCalendar{
             .attr('stroke-width', self.cfg.stroke)
 
         this.itemg.append('circle')
+            .attr('class', 'start')
             .attr('cy', 0)
             .attr('cx', function(d){
                 return self.xScale(d.jsdateStart);
             })
             .attr('r', self.cfg.radius)
+            .attr('stroke-width', 3)
             .attr('fill', self.cfg.color);
 
         this.itemg.append('circle')
+            .attr('class', 'end')
             .attr('cy', 0)
             .attr('cx', function(d){
                 return self.xScale(d.jsdateEnd);
             })
             .attr('r', self.cfg.radius)
+            .attr('stroke-width', 3)
             .attr('fill', self.cfg.color);
 
         // MOUSE INDICATOR
@@ -164,8 +169,18 @@ class LinearCalendar{
             self.mousegroup.style('opacity', '0')
         }).on('mousemove', function(){
             var mouse = d3.mouse(this);
+            var tim = self.formatTime(self.xScale.invert(mouse[0]));
             self.mousegroup.attr("transform", "translate("+mouse[0]+",0)")
-            self.mousetext.text(self.formatTime(self.xScale.invert(mouse[0])))
+            self.mousetext.text(self.formatTimeLeg(self.xScale.invert(mouse[0])))
+            
+            self.itemg.selectAll('circle')
+                .attr('stroke', 'trasparent')
+            self.itemg.filter(function(d){ return d.inicio ==  tim; })
+                .selectAll('.start')
+                .attr('stroke', self.cfg.color)
+            self.itemg.filter(function(d){ return d.fin ==  tim; })
+                .selectAll('.end')
+                .attr('stroke', self.cfg.color)
         })
     }
 
