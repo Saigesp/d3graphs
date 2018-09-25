@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+
+<style>
+
+</style>
+<body>
+    <div id="calendar" style="height: 300px;"></div>
+
+
+    <script src="../../d3.v4.min.js"></script>
+    <script src="d3.calendar.js"></script>
+    <script>
+        d3.csv("accs_per_day.csv", function(error, data) {
+            if (error) throw error;
+
+            var chart = new Calendar(d3.select('#calendar'), data, {
+                'datefield': 'date',
+            })
+        });
+    </script>
+
+</body>
+</html>
