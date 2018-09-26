@@ -6,12 +6,16 @@ class Calendar{
 
         // Graph configuration
         this.cfg = {
-            'margin': {'top': 30, 'right': 20, 'bottom': 40, 'left': 40},
+            'margin': {'top': 30, 'right': 20, 'bottom': 10, 'left': 20},
+            'key': 'key',
             'datefield': 'date',
             'dateformat': '%d-%m-%Y', // https://github.com/d3/d3-time-format/blob/master/README.md#locale_format
             'title': false,
             'source': false,
             'rectsize': 10,
+            'colorScale': d3.interpolateRdBu,
+            'emptycolor': '#EEE',
+            'year': false,
         };
 
         this.cfg.width = parseInt(this.selection.style('width')) - this.cfg.margin.left - this.cfg.margin.right,
@@ -28,12 +32,18 @@ class Calendar{
         this.extentdates = d3.extent(this.data, function(d){ return d[self.cfg.datefield]});
         this.parseTime = d3.timeParse(this.cfg.dateformat);
         this.formatTime = d3.timeFormat(this.cfg.dateformat);
+        this.year = self.cfg.year ? self.cfg.year : + self.extentdates[0].substr(0,4);
 
+        this.cfg.rectsize = this.cfg.width/53 < this.cfg.height/7 ? this.cfg.width/53 : this.cfg.height/7;
+
+        this.cScale = d3.scaleSequential(this.cfg.colorScale);
 
         this.initGraph();
     }
     initGraph() {
-     var self = this;
+        var self = this;
+
+        this.cScale.domain(d3.extent(this.data, function(d){ return +d[self.cfg.key]}).reverse())
 
         this.svg = this.selection.append('svg')
             .attr("class", "chart calendar")
@@ -63,16 +73,34 @@ class Calendar{
         }
 
         this.rects = this.g.selectAll("rect")
-            .data(function(d) { return d3.timeDays(new Date(+self.extentdates[0].substr(0,4), 0, 1), new Date(+self.extentdates[0].substr(0,4) + 1, 0, 1)); })
+            .data(function(d) { return d3.timeDays(new Date(self.year, 0, 1), new Date(self.year + 1, 0, 1)); })
             .enter().append("rect")
             .attr("width", self.cfg.rectsize)
             .attr("height", self.cfg.rectsize)
             .attr("x", function(d) { return d3.timeWeek.count(d3.timeYear(d), d) * self.cfg.rectsize; })
             .attr("y", function(d) { return d.getDay() * self.cfg.rectsize; })
-/*
-            .datum(d3.timeFormat("%Y-%m-%d"));
-*/
+            .attr("fill", self.cfg.emptycolor)
+
+        var kata = d3.nest()
+            .key(function(d) { return d[self.cfg.datefield]; })
+            .rollup(function(d) { return +d[0][self.cfg.key]; })
+            .object(this.data);
+
+        this.rects.filter(function(d) { return d.yyyymmdd() in kata; })
+            .attr("fill", function(d) { return self.cScale(kata[d.yyyymmdd()]); })
+            .append("title")
+            .text(function(d) { return d.yyyymmdd() + ": " + kata[d.yyyymmdd()]; });
 
     }
 
 }
+
+Date.prototype.yyyymmdd = function(joinchar='-') {
+  var mm = this.getMonth() + 1; // getMonth() is zero-based
+  var dd = this.getDate();
+
+  return [this.getFullYear(),
+          (mm>9 ? '' : '0') + mm,
+          (dd>9 ? '' : '0') + dd
+         ].join(joinchar);
+};

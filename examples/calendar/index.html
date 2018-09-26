@@ -11,13 +11,16 @@
 
 
     <script src="../../d3.v4.min.js"></script>
+    <script src="../../d3-scale-chromatic.v0.3.min.js"></script>
     <script src="d3.calendar.js"></script>
     <script>
         d3.csv("accs_per_day.csv", function(error, data) {
             if (error) throw error;
 
             var chart = new Calendar(d3.select('#calendar'), data, {
-                'datefield': 'date',
+                'datefield': 'fecha',
+                'key': 'precio',
+                'year': 2018,
             })
         });
     </script>
