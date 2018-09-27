@@ -34,8 +34,7 @@ class BarChart{
     initGraph() {
         var self = this;
 
-        this.xScale.domain(this.data.map(function(d) { return +d[self.cfg.label]; }));
-        //this.xScale.domain(d3.extent(this.data, function(d) { return +d[self.cfg.label]; }));
+        this.xScale.domain(this.data.map(function(d) { return d[self.cfg.label]; }));
         this.yScale.domain([d3.max(this.data, function(d){ return +d[self.cfg.key]}),0])
 
         this.svg = this.selection.append('svg')
@@ -70,7 +69,7 @@ class BarChart{
                 .attr("class", "grid grid--y")
                 .call(self.make_y_gridlines()
                     .tickSize(-self.cfg.width)
-                    .tickFormat(d3.format(".0s")));
+                    .tickFormat(d3.format("d")));
 
         // AXIS
         this.g.append("g")
@@ -88,7 +87,7 @@ class BarChart{
             .enter().append('g')
             .attr('class', 'itemgroup')
             .attr('transform', function(d, i){
-                return 'translate('+ self.xScale(+d[self.cfg.label]) +',0)';
+                return 'translate('+ self.xScale(d[self.cfg.label]) +',0)';
         })
 
         this.itemg.append('rect')
