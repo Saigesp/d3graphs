@@ -6,7 +6,7 @@ class Calendar{
 
         // Graph configuration
         this.cfg = {
-            'margin': {'top': 30, 'right': 20, 'bottom': 10, 'left': 20},
+            'margin': {'top': 30, 'right': 30, 'bottom': 10, 'left': 50},
             'key': 'key',
             'datefield': 'date',
             'dateformat': '%d-%m-%Y', // https://github.com/d3/d3-time-format/blob/master/README.md#locale_format
@@ -16,6 +16,9 @@ class Calendar{
             'colorScale': d3.interpolateRdBu,
             'emptycolor': '#EEE',
             'year': false,
+            'mondaystart': false,
+            'weekdayformat': '%a',
+            'monthformat': '%b',
         };
 
         this.cfg.width = parseInt(this.selection.style('width')) - this.cfg.margin.left - this.cfg.margin.right,
@@ -30,13 +33,15 @@ class Calendar{
         });
 
         this.extentdates = d3.extent(this.data, function(d){ return d[self.cfg.datefield]});
-        this.parseTime = d3.timeParse(this.cfg.dateformat);
-        this.formatTime = d3.timeFormat(this.cfg.dateformat);
         this.year = self.cfg.year ? self.cfg.year : + self.extentdates[0].substr(0,4);
-
         this.cfg.rectsize = this.cfg.width/53 < this.cfg.height/7 ? this.cfg.width/53 : this.cfg.height/7;
-
+        this.dayCalc = this.cfg.mondaystart ? function(d) { return (d.getDay() + 6) % 7; } : function(d) { return d.getDay(); }
+        this.weekCalc = this.cfg.mondaystart ? d3.timeFormat("%W") : d3.timeFormat("%U");
         this.cScale = d3.scaleSequential(this.cfg.colorScale);
+
+        this.weekDay = d3.timeFormat(self.cfg.weekdayformat);
+        this.monthName = d3.timeFormat(self.cfg.monthformat);
+
 
         this.initGraph();
     }
@@ -77,26 +82,51 @@ class Calendar{
             .enter().append("rect")
             .attr("width", self.cfg.rectsize)
             .attr("height", self.cfg.rectsize)
-            .attr("x", function(d) { return d3.timeWeek.count(d3.timeYear(d), d) * self.cfg.rectsize; })
-            .attr("y", function(d) { return d.getDay() * self.cfg.rectsize; })
+            .attr("x", function(d) { return self.weekCalc(d) * self.cfg.rectsize; })
+            .attr("y", function(d) { return self.dayCalc(d) * self.cfg.rectsize; })
             .attr("fill", self.cfg.emptycolor)
 
-        var kata = d3.nest()
+        var nesteddata = d3.nest()
             .key(function(d) { return d[self.cfg.datefield]; })
             .rollup(function(d) { return +d[0][self.cfg.key]; })
             .object(this.data);
 
-        this.rects.filter(function(d) { return d.yyyymmdd() in kata; })
-            .attr("fill", function(d) { return self.cScale(kata[d.yyyymmdd()]); })
+        this.rects.filter(function(d) { return d.yyyymmdd() in nesteddata; })
+            .attr("fill", function(d) { return self.cScale(nesteddata[d.yyyymmdd()]); })
             .append("title")
-            .text(function(d) { return d.yyyymmdd() + ": " + kata[d.yyyymmdd()]; });
+            .text(function(d) { return d.yyyymmdd() + ": " + nesteddata[d.yyyymmdd()]; });
 
+
+        self.drawLabels();
+    }
+
+    drawLabels() {
+        var self = this;
+
+        var j_start = this.cfg.mondaystart ? 1 : 0;
+
+        for(var j = j_start; j < j_start+7; j++){
+            self.g.append("text")
+                .attr("class", 'label')
+                .style("text-anchor", "end")
+                .attr("dy", self.cfg.rectsize * (j - j_start) + self.cfg.rectsize*0.7)
+                .attr("dx", "-1em")
+                .text(self.weekDay(new Date(2018, 0, j)));
+        }
+        for(var j = 0; j < 12; j++){
+            self.g.append("text")
+                .attr("class", 'label')
+                .style("text-anchor", "middle")
+                .attr("dy", -5)
+                .attr("dx", j*(self.cfg.width/12) + 0.5*(self.cfg.width/12))
+                .text(self.monthName(new Date(2018, j, 1)));
+        }
     }
 
 }
 
 Date.prototype.yyyymmdd = function(joinchar='-') {
-  var mm = this.getMonth() + 1; // getMonth() is zero-based
+  var mm = this.getMonth() + 1;
   var dd = this.getDate();
 
   return [this.getFullYear(),
