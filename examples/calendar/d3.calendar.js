@@ -118,7 +118,7 @@ class Calendar{
                 .attr("class", 'label')
                 .style("text-anchor", "middle")
                 .attr("dy", -5)
-                .attr("dx", j*(self.cfg.width/12) + 0.5*(self.cfg.width/12))
+                .attr("dx", (j*self.cfg.rectsize*4.4) + (self.cfg.rectsize*2.2))
                 .text(self.monthName(new Date(2018, j, 1)));
         }
     }
