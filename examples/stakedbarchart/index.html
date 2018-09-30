@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<style>
+    .chart .grid line {
+        opacity: 0.1;
+    }
+    .chart .grid path {
+        fill: transparent;
+        stroke: transparent;
+    }
+    .label {        
+        font-family: sans-serif;
+        font-size: 12px;
+        cursor: default;
+    }
+    .chart .source {
+        fill: #7a7a7a;
+        font-size: 10px;
+    }
+    .chart .source a {
+        text-decoration: underline;
+    }
+    .chart .title {
+        font-weight: 700;
+    }
+</style>
+<body>
+    <div id="bars" style="width: 960px; height: 360px;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    <script src="d3.stackedbar.js"></script>
+    <script>
+    d3.json('regiondata.json', function(data) {
+
+        var stacked = new StackedBarChart(d3.select('#bars'), data.properties.cities, {
+            'key': 'name',
+            'currentkey':'*',
+            'keys': ['airbnb_totals', 'homeaw_totals', 'houset_totals', 'onlyap_totals'],
+            'colors': ['#FF5F6B', '#2E87E3', '#88C8F3', '#4CAF50'],
+        })
+
+        
+    })
+
+    </script>
+</body>
+
+
+</html>

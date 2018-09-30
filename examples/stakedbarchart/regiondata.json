@@ -1,0 +1,192 @@
+{
+    "_id": "0",
+    "properties":
+    {
+        "cities": [
+        {
+            "airbnb_totals": 3486,
+            "houset_totals": 58,
+            "homeaw_totals": 568,
+            "name": "Granada",
+            "onlyap_totals": 134,
+            "_id": "5992312a8a46554f807ad627"
+        },
+        {
+            "airbnb_totals": 2181,
+            "houset_totals": 195,
+            "homeaw_totals": 884,
+            "name": "Benalm\u00e1dena",
+            "onlyap_totals": 145,
+            "_id": "599231398a46554f807ad78f"
+        },
+        {
+            "airbnb_totals": 2255,
+            "houset_totals": 375,
+            "homeaw_totals": 1017,
+            "name": "Estepona",
+            "onlyap_totals": 121,
+            "_id": "5992313a8a46554f807ad795"
+        },
+        {
+            "airbnb_totals": 5762,
+            "houset_totals": 27,
+            "homeaw_totals": 1999,
+            "name": "M\u00e1laga",
+            "onlyap_totals": 474,
+            "_id": "5992313a8a46554f807ad79a"
+        },
+        {
+            "airbnb_totals": 5721,
+            "houset_totals": 385,
+            "homeaw_totals": 2354,
+            "name": "Marbella",
+            "onlyap_totals": 321,
+            "_id": "5992313a8a46554f807ad79c"
+        },
+        {
+            "airbnb_totals": 2557,
+            "houset_totals": 387,
+            "homeaw_totals": 1373,
+            "name": "Mijas",
+            "onlyap_totals": 209,
+            "_id": "5992313a8a46554f807ad79d"
+        },
+        {
+            "airbnb_totals": 6973,
+            "houset_totals": 597,
+            "homeaw_totals": 2021,
+            "name": "Sevilla",
+            "onlyap_totals": 176,
+            "_id": "5992313d8a46554f807ad7da"
+        },
+        {
+            "airbnb_totals": 24029,
+            "houset_totals": 1282,
+            "homeaw_totals": 5093,
+            "name": "Barcelona",
+            "onlyap_totals": 1483,
+            "_id": "599231f58a46554f807ae8fb"
+        },
+        {
+            "airbnb_totals": 2171,
+            "houset_totals": 42,
+            "homeaw_totals": 1470,
+            "name": "Salou",
+            "onlyap_totals": 448,
+            "_id": "5992320e8a46554f807aeb52"
+        },
+        {
+            "airbnb_totals": 22909,
+            "houset_totals": 801,
+            "homeaw_totals": 3693,
+            "name": "Madrid",
+            "onlyap_totals": 872,
+            "_id": "599232178a46554f807aec1b"
+        },
+        {
+            "airbnb_totals": 3732,
+            "houset_totals": 249,
+            "homeaw_totals": 642,
+            "name": "Alacant",
+            "onlyap_totals": 66,
+            "_id": "599232288a46554f807aedcb"
+        },
+        {
+            "airbnb_totals": 2913,
+            "houset_totals": 0,
+            "homeaw_totals": 1063,
+            "name": "Torrevieja",
+            "onlyap_totals": 174,
+            "_id": "5992322a8a46554f807aedfc"
+        },
+        {
+            "airbnb_totals": 2597,
+            "houset_totals": 137,
+            "homeaw_totals": 1806,
+            "name": "D\u00e9nia",
+            "onlyap_totals": 662,
+            "_id": "5992322c8a46554f807aee20"
+        },
+        {
+            "airbnb_totals": 8120,
+            "houset_totals": 259,
+            "homeaw_totals": 1112,
+            "name": "Valencia",
+            "onlyap_totals": 266,
+            "_id": "599232358a46554f807aef06"
+        },
+        {
+            "airbnb_totals": 2283,
+            "houset_totals": 565,
+            "homeaw_totals": 1183,
+            "name": "La Oliva",
+            "onlyap_totals": 92,
+            "_id": "599232618a46554f807af2f5"
+        },
+        {
+            "airbnb_totals": 2691,
+            "houset_totals": 211,
+            "homeaw_totals": 869,
+            "name": "Las Palmas",
+            "onlyap_totals": 119,
+            "_id": "599232618a46554f807af2f6"
+        },
+        {
+            "airbnb_totals": 2411,
+            "houset_totals": 435,
+            "homeaw_totals": 1326,
+            "name": "San Bartolom\u00e9 de Tirajana",
+            "onlyap_totals": 352,
+            "_id": "599232628a46554f807af2fb"
+        },
+        {
+            "airbnb_totals": 3371,
+            "houset_totals": 399,
+            "homeaw_totals": 1456,
+            "name": "Adeje",
+            "onlyap_totals": 125,
+            "_id": "599232648a46554f807af30c"
+        },
+        {
+            "airbnb_totals": 3144,
+            "houset_totals": 428,
+            "homeaw_totals": 1211,
+            "name": "Arona",
+            "onlyap_totals": 208,
+            "_id": "599232658a46554f807af311"
+        },
+        {
+            "airbnb_totals": 2206,
+            "houset_totals": 0,
+            "homeaw_totals": 782,
+            "name": "Donostia",
+            "onlyap_totals": 173,
+            "_id": "599232738a46554f807af449"
+        }],
+        "countries": [
+        {
+            "airbnb_totals": 308857,
+            "houset_totals": 22109,
+            "homeaw_totals": 144306,
+            "name": "Spain",
+            "onlyap_totals": 24543,
+            "_id": "599216cb8a4655339b819813"
+        },
+        {
+            "airbnb_totals": 71786,
+            "houset_totals": 6172,
+            "homeaw_totals": 40231,
+            "name": "Portugal",
+            "onlyap_totals": 3778,
+            "_id": "5b06cfc88a4655394ee2b210"
+        },
+        {
+            "airbnb_totals": 722,
+            "houset_totals": 24,
+            "homeaw_totals": 280,
+            "name": "Andorra",
+            "onlyap_totals": 174,
+            "_id": "5b8be507bbef6076ab44b381"
+        }]
+    }
+}
