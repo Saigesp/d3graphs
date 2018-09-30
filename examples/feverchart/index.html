@@ -1,69 +1,64 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Temp change</title>
 </head>
-
+<style>
+    .chart .label {        
+        font-family: sans-serif;
+        font-size: 12px;
+        cursor: default;
+    }
+    .chart .line {
+        fill: transparent;
+        stroke-width: 2px;
+    }
+    .chart .trendline {
+        stroke: #ff4e00;
+    }
+    .chart .grid line {
+        opacity: 0.1;
+    }
+    .chart .grid path {
+        fill: transparent;
+        stroke: transparent;
+    }
+    .chart .source {
+        fill: #7a7a7a;
+        font-size: 10px;
+    }
+    .chart .source a {
+        text-decoration: underline;
+    }
+    .chart .title {
+        font-weight: 700;
+    }
+    .point--group .external {
+        fill: transparent;
+    }
+    .chart .point--group .internal {
+        stroke: white;
+    }
+    .chart .point--group .internal,
+    .chart .point--group .label {
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 200ms ease;
+    }
+    .chart:hover .point--group .internal,
+    .chart .point--group.is-active .label {
+        opacity: 1;
+    }
+    .chart.is-active .line {
+        opacity: 0.2;
+    }
+    .chart.is-active .point--group .internal {
+        opacity: 0.2;
+    }
+</style>
 <body>
-
-    <style>
-        .chart .label {        
-            font-family: sans-serif;
-            font-size: 12px;
-            cursor: default;
-        }
-        .chart .line {
-            fill: transparent;
-            stroke-width: 2px;
-        }
-        .chart .trendline {
-            stroke: #ff4e00;
-        }
-        .chart .grid line {
-            opacity: 0.1;
-        }
-        .chart .grid path {
-            fill: transparent;
-            stroke: transparent;
-        }
-        .chart .source {
-            fill: #7a7a7a;
-            font-size: 10px;
-        }
-        .chart .source a {
-            text-decoration: underline;
-        }
-        .chart .title {
-            font-weight: 700;
-        }
-        .point--group .external {
-            fill: transparent;
-        }
-        .chart .point--group .internal {
-            stroke: white;
-        }
-        .chart .point--group .internal,
-        .chart .point--group .label {
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 200ms ease;
-        }
-        .chart:hover .point--group .internal,
-        .chart .point--group.is-active .label {
-            opacity: 1;
-        }
-        .chart.is-active .line {
-            opacity: 0.2;
-        }
-        .chart.is-active .point--group .internal {
-            opacity: 0.2;
-        }
-    </style>
-
-    <div id="biomass" style="width: 900px; height: 300px; margin-top: 60px; margin-left: 100px;"></div>
-    <div id="recruitment" style="width: 900px; height: 300px; margin-top: 60px; margin-left: 100px;"></div>
+    <div id="biomass" style="width: 900px; height: 300px;"></div>
     
-    <script src="d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
     <script src="leastSquares.js"></script>
     <script src="d3.trendschart.js"></script>
     <script>
@@ -78,17 +73,6 @@
             'yscaleformat': 's',
             'colors': ['#000000'],
             'title': 'Biomasa de 1 año y mayor (Biomass 1+) de sardinas en el Mar Cantábrico y las aguas del Atlántico ibérico',
-            'source': 'Fuente: <a href="http://ices.dk/sites/pub/Publication%20Reports/Advice/2018/2018/pil.27.8c9a.pdf">ICES Advice on fishing opportunities, catch, and effort</a>. 13 julio 2018.',
-        })
-
-        var recruitment = new TrendChart(d3.select('#recruitment'), data, {
-            'keys': ['recruitment'],
-            'datefield': 'year',
-            'dateformat': '%Y',
-            'ygrid': true,
-            'yscaleformat': 's',
-            'colors': ['#000000'],
-            'title': 'Reclutamiento de edad 0 de sardinas en el Mar Cantábrico y las aguas del Atlántico ibérico',
             'source': 'Fuente: <a href="http://ices.dk/sites/pub/Publication%20Reports/Advice/2018/2018/pil.27.8c9a.pdf">ICES Advice on fishing opportunities, catch, and effort</a>. 13 julio 2018.',
         })
 
