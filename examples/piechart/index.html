@@ -1,0 +1,35 @@
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<style>
+    .label {        
+        font-family: sans-serif;
+        font-size: 12px;
+    }
+    .chart .line {
+        fill: transparent;
+        stroke: black;
+        opacity: 0.6;
+    }
+</style>
+<body>
+    <div id="container" style="width: 960px; height: 440px;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    <script src="d3.piechart.js"></script>
+    <script>
+        d3.csv('data.csv', function(data) {
+
+            var chart = new PieChart(d3.select('#container'), data, {
+                'key': 'income',
+                'label': 'name',
+                'radius': 140,
+                'innerradius': 120,
+            })
+            
+        })
+    </script>
+</body>
+
+
+</html> 
