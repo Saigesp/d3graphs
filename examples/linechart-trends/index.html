@@ -65,7 +65,7 @@
 
     d3.csv('sardines.csv', function(data) {
 
-        var biomass = new TrendChart(d3.select('#biomass'), data, {
+        var biomass = new TrendLineChart(d3.select('#biomass'), data, {
             'keys': ['biomass'],
             'datefield': 'year',
             'dateformat': '%Y',

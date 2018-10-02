@@ -45,7 +45,7 @@ class BrushedHistogram {
         var self = this;
 
         this.svg = this.selection.append('svg')
-            .attr("class", "chart histogram brushedhistogram")
+            .attr("class", "chart histogram histogram-brushed")
             .attr("viewBox", "0 0 "+(this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)+" "+(this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom))
             .attr("width", this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)
             .attr("height", this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom);

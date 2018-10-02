@@ -1,4 +1,4 @@
-class TrendChart {
+class TrendLineChart {
 
     constructor(selection, data, config = {}) {
         let self = this;
@@ -88,7 +88,7 @@ class TrendChart {
 
         // SVG
         this.svg = this.selection.append('svg')
-            .attr("class", "chart linechart feverchart")
+            .attr("class", "chart linechart linechart-trends")
             .attr("viewBox", "0 0 "+(this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)+" "+(this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom))
             .attr("width", this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)
             .attr("height", this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom);
