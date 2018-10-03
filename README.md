@@ -10,3 +10,12 @@ See examples on https://bl.ocks.org/Saigesp
 - D3v4
 - Maps are built with Mapbox and Leaflet
 - Some dataviz requires d3-scale-chromatic
+
+## Examples development
+
+- Requires git with SSH
+
+```sh
+sh pull_examples.sh
+sh push_examples.sh
+```
