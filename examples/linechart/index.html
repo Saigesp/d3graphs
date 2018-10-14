@@ -65,9 +65,10 @@
     d3.json('population.json', function(data) {
 
         var evolution = new LineChart(d3.select('#evolution'), data.history, {
-            'keys': ['total', 'men', 'women'],
+            'keys': ['total', 'hombres', 'mujeres'],
             'datefield': 'datetime',
             'dateformat': '%Q',
+            'yscaleformat': '.0s',
             'ygrid': true,
             'colors': ['#3161e2','#e0455a', '#a438e2'],
             'title': 'Población de Málaga',

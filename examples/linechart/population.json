@@ -3,116 +3,116 @@
     {
         "datetime": 1483228800000,
         "total": 569002,
-        "men": 273636,
-        "women": 295366
+        "hombres": 273636,
+        "mujeres": 295366
     },
     "history": [
     {
         "datetime": 946684800000,
         "total": 531565,
-        "men": 252570,
-        "women": 278995
+        "hombres": 252570,
+        "mujeres": 278995
     },
     {
         "datetime": 978307200000,
         "total": 534207,
-        "men": 254477,
-        "women": 279730
+        "hombres": 254477,
+        "mujeres": 279730
     },
     {
         "datetime": 1009843200000,
         "total": 535686,
-        "men": 255964,
-        "women": 279722
+        "hombres": 255964,
+        "mujeres": 279722
     },
     {
         "datetime": 1041379200000,
         "total": 547105,
-        "men": 262983,
-        "women": 284122
+        "hombres": 262983,
+        "mujeres": 284122
     },
     {
         "datetime": 1072915200000,
         "total": 547731,
-        "men": 263776,
-        "women": 283955
+        "hombres": 263776,
+        "mujeres": 283955
     },
     {
         "datetime": 1104537600000,
         "total": 558287,
-        "men": 269479,
-        "women": 288808
+        "hombres": 269479,
+        "mujeres": 288808
     },
     {
         "datetime": 1136073600000,
         "total": 560631,
-        "men": 270672,
-        "women": 289959
+        "hombres": 270672,
+        "mujeres": 289959
     },
     {
         "datetime": 1167609600000,
         "total": 561250,
-        "men": 271042,
-        "women": 290208
+        "hombres": 271042,
+        "mujeres": 290208
     },
     {
         "datetime": 1199145600000,
         "total": 566447,
-        "men": 273299,
-        "women": 293148
+        "hombres": 273299,
+        "mujeres": 293148
     },
     {
         "datetime": 1230768000000,
         "total": 568305,
-        "men": 274209,
-        "women": 294096
+        "hombres": 274209,
+        "mujeres": 294096
     },
     {
         "datetime": 1262304000000,
         "total": 568507,
-        "men": 273958,
-        "women": 294549
+        "hombres": 273958,
+        "mujeres": 294549
     },
     {
         "datetime": 1293840000000,
         "total": 568030,
-        "men": 273355,
-        "women": 294675
+        "hombres": 273355,
+        "mujeres": 294675
     },
     {
         "datetime": 1325376000000,
         "total": 567433,
-        "men": 272927,
-        "women": 294506
+        "hombres": 272927,
+        "mujeres": 294506
     },
     {
         "datetime": 1356998400000,
         "total": 568479,
-        "men": 273475,
-        "women": 295004
+        "hombres": 273475,
+        "mujeres": 295004
     },
     {
         "datetime": 1388534400000,
         "total": 566913,
-        "men": 272674,
-        "women": 294239
+        "hombres": 272674,
+        "mujeres": 294239
     },
     {
         "datetime": 1420070400000,
         "total": 569130,
-        "men": 273817,
-        "women": 295313
+        "hombres": 273817,
+        "mujeres": 295313
     },
     {
         "datetime": 1451606400000,
         "total": 569009,
-        "men": 273715,
-        "women": 295294
+        "hombres": 273715,
+        "mujeres": 295294
     },
     {
         "datetime": 1483228800000,
         "total": 569002,
-        "men": 273636,
-        "women": 295366
+        "hombres": 273636,
+        "mujeres": 295366
     }]
 }

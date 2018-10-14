@@ -43,11 +43,7 @@ class LineChart {
         this.parseTime = d3.timeParse(this.cfg.dateformat),
         this.formatTime = d3.timeFormat('%d-%m-%Y'),
 
-        this.line = d3.line()
-            .x(function(d){ return self.xScale(d.x); })
-            .y(function(d){ return self.yScale(d.y); });
-
-        window.addEventListener("resize", function(){self.resize()});
+        window.addEventListener("resize", function(){ self.draw() });
 
         this.initGraph();
     }
@@ -87,51 +83,18 @@ class LineChart {
             .attr("transform", "translate(" + (self.cfg.margin.left) + "," + (self.cfg.margin.top) + ")");
 
         // GRIDLINES
-        if(this.cfg.xgrid){
-            this.xGrid = this.g.append("g")           
-                .attr("class", "grid grid--x")
-                .call(self.make_x_gridlines()
-                    .tickSize(self.cfg.height)
-                    .tickFormat(""))
-        }
-
-        if(this.cfg.ygrid){
-            this.yGrid = this.g.append("g")           
-                .attr("class", "grid grid--y")
-                .call(self.make_y_gridlines()
-                    .tickSize(-self.cfg.width)
-                    .tickFormat("")
-                    .ticks(3, self.cfg.yscaleformat));
-        }
+        if(this.cfg.xgrid) this.xGrid = this.g.append("g").attr("class", "grid grid--x")
+        if(this.cfg.ygrid) this.yGrid = this.g.append("g").attr("class", "grid grid--y");
 
         // AXIS
-        this.xAxis = this.g.append("g")
-            .attr("class", "axis axis--x")
-            .attr("transform", "translate(0," + this.cfg.height + ")")
-            .call(d3.axisBottom(self.xScale));
-
-        this.yAxis = this.g.append("g")
-            .attr("class", "axis axis--y")
-            .call(d3.axisLeft(self.yScale)
-                .ticks(3, self.cfg.yscaleformat));
+        this.xAxis = this.g.append("g").attr("class", "axis axis--x")
+        this.yAxis = this.g.append("g").attr("class", "axis axis--y")
 
         // TITLE
-        if(self.cfg.title){
-            this.title = this.svg.append('text')
-                .attr('class', 'title label')
-                .attr('text-anchor', 'middle')
-                .attr('transform', 'translate('+ (self.cfg.width/2) +',20)')
-                .text(self.cfg.title)
-        }
+        if(self.cfg.title) this.title = this.svg.append('text').attr('class', 'title label').attr('text-anchor', 'middle').text(self.cfg.title)
 
         // SOURCE
-        if(self.cfg.source){
-            this.source = this.svg.append('text')
-                .attr('class', 'source label')
-                .attr('transform', 'translate('+ (self.cfg.margin.left) +','+(self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom - 5)+')')
-                .html(self.cfg.source)
-
-        }
+        if(self.cfg.source) this.source = this.svg.append('text').attr('class', 'source label').html(self.cfg.source)
 
         // LINES
         this.lineg = this.g.selectAll(".line--group")
@@ -144,9 +107,6 @@ class LineChart {
         this.lines = this.lineg.append('path')
             .attr("class", "line")
             .style('stroke', function(d, i){ return self.colorScale(i); })
-            .attr("d", function(d) {
-                return self.line(d.values);
-            });
 
         // POINTS
         this.pointsg = []
@@ -155,9 +115,6 @@ class LineChart {
                 .data(self.data).enter()
                 .append('g')
                 .attr('class', 'point--group point--group__'+k)
-                .attr('transform', function(d){
-                    return 'translate('+self.xScale(d.jsdate)+','+self.yScale(d[k])+')';
-                })
 
             gp.append('circle')
                 .attr('class', 'external')
@@ -184,27 +141,11 @@ class LineChart {
             self.pointsg.push({selection:gp, key:k })
         })
 
+        self.draw()
+
     }
 
-    // gridlines in x axis function
-    make_x_gridlines() {       
-        return d3.axisBottom(this.xScale);
-    }
-
-    // gridlines in y axis function
-    make_y_gridlines() {       
-        return d3.axisLeft(this.yScale);
-    }
-    // Data functions
-    setData(data){
-        this.data = data;
-    }
-
-    getData(){
-        return this.data;
-    }
-
-    resize(){
+    draw(){
         var self = this;
 
         this.cfg.width = parseInt(this.selection.node().offsetWidth) - this.cfg.margin.left - this.cfg.margin.right;
@@ -233,14 +174,11 @@ class LineChart {
         }
 
         // AXIS
-        this.xAxis.attr("transform", "translate(0," + this.cfg.height + ")")
-            .call(d3.axisBottom(self.xScale));
-
-        this.yAxis.call(d3.axisLeft(self.yScale)
-            .ticks(3, self.cfg.yscaleformat));
+        this.xAxis.attr("transform", "translate(0," + this.cfg.height + ")").call(d3.axisBottom(self.xScale));
+        this.yAxis.call(d3.axisLeft(self.yScale).ticks(3, self.cfg.yscaleformat));
 
         // TITLE
-        if(self.cfg.title) this.title.attr('transform', 'translate('+ (self.cfg.width/2) +',20)')
+        if(self.cfg.title) this.title.attr('transform', 'translate('+ ((self.cfg.width/2) + self.cfg.margin.left) +',20)')
         
         // SOURCE
         if(self.cfg.source) this.source.attr('transform', 'translate('+ (self.cfg.margin.left) +','+(self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom - 5)+')')
@@ -250,33 +188,31 @@ class LineChart {
             .x(function(d){ return self.xScale(d.x); })
             .y(function(d){ return self.yScale(d.y); });
 
-        this.lines.attr("d", function(d) {
-                return self.line(d.values);
-            });
+        this.lines.attr("d", function(d) { return self.line(d.values) });
 
         // POINTS
         this.pointsg.forEach(function(p, i){
             p.selection.attr('transform', function(d){ return 'translate('+self.xScale(d.jsdate)+','+self.yScale(d[p.key])+')'; })
         })
-/*
-
-        this.itemg.attr('transform', function(d, i){
-            return 'translate('+ self.xScale(d[self.cfg.label]) +',0)';
-        })
-
-        this.rects.attr('width', this.xScale.bandwidth())
-            .attr('y', function(d, i){
-                return self.yScale(+d[self.cfg.key]);
-            })
-            .attr('height', function(d){
-                return self.cfg.height - self.yScale(+d[self.cfg.key]);
-            })
-
-        if(self.cfg.title) this.title.attr('transform', 'translate('+ (self.cfg.width/2) +',20)')
-    
-        // SOURCE
-        if(self.cfg.source) this.source.attr('transform', 'translate('+ (self.cfg.margin.left) +','+(self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom - 5)+')')
-*/
     }
+
+    // gridlines in x axis function
+    make_x_gridlines() {       
+        return d3.axisBottom(this.xScale);
+    }
+
+    // gridlines in y axis function
+    make_y_gridlines() {       
+        return d3.axisLeft(this.yScale);
+    }
+    // Data functions
+    setData(data){
+        this.data = data;
+    }
+
+    getData(){
+        return this.data;
+    }
+
 
 };
