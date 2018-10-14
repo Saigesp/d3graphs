@@ -1,0 +1,96 @@
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<style>
+    .chart .axis{
+        shape-rendering: crispEdges;
+    }
+    .chart .label {        
+        font-family: sans-serif;
+        font-size: 10px;
+        cursor: default;
+    }
+    .chart .line {
+        fill: transparent;
+        stroke-width: 1px;
+    }
+    .chart .grid line {
+        opacity: 0.1;
+    }
+    .chart .grid path {
+        fill: transparent;
+        stroke: transparent;
+    }
+    .chart .source {
+        fill: #7a7a7a;
+        font-size: 10px;
+    }
+    .chart .source a {
+        text-decoration: underline;
+    }
+    .chart .title {
+        font-weight: 700;
+    }
+    /* SLOPEGRAPH */
+
+</style>
+<body>
+    <div id="evolution" style="width: 100%; height: 400px;"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    <script src="d3.slopegraph.js"></script>
+    <script>
+
+    d3.json('data.json', function(data) {
+
+        var evolution = new SlopeGraph(d3.select('#evolution'), data, {
+            'key': 'name',
+            'currentkey': 'Málaga',
+            'yscaleformat': '.0s',
+            'color': ['#3161e2'],
+            'title': 'Población de Málaga',
+            'source': 'Fuente: INE',
+            'labels': ['2000', '2015'],
+        })
+
+
+        setTimeout(function(){
+
+            evolution.add([{
+                "name": "Sevilla",
+                "start": 8355,
+                "end": 10855
+            },{
+                "name": "Madrid",
+                "start": 11355,
+                "end": 7805
+            }])
+
+        }, 2000);
+
+        setTimeout(function(){
+
+            evolution.remove({
+                "name": "Sevilla",
+            })
+
+        }, 4000);
+
+        setTimeout(function(){
+
+            evolution.add([{
+                "name": "Barcelona",
+                "start": 18355,
+                "end": 20855
+            }])
+
+        }, 6000);
+
+
+    })
+    </script>
+</body>
+
+
+</html>
