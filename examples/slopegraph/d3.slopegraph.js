@@ -13,7 +13,6 @@ class SlopeGraph {
             'color': '#1f77b4',
             'defaultcolor': '#AAA',
             'opacity': 0.5,
-            //'yscaleformat': '.0f',
             'radius': 3,
             'title': false,
             'source': false,
