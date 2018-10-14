@@ -1,0 +1,82 @@
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<style>
+    .chart .label {        
+        font-family: sans-serif;
+        font-size: 12px;
+        cursor: default;
+    }
+    .chart .line {
+        fill: transparent;
+        stroke-width: 2px;
+    }
+    .chart .grid line {
+        opacity: 0.1;
+    }
+    .chart .grid path {
+        fill: transparent;
+        stroke: transparent;
+    }
+    .chart .source {
+        fill: #7a7a7a;
+        font-size: 10px;
+    }
+    .chart .source a {
+        text-decoration: underline;
+    }
+    .chart .title {
+        font-weight: 700;
+    }
+    /* LINECHART */
+    .linechart .point--group .external {
+        fill: transparent;
+    }
+    .linechart .point--group .internal {
+        stroke: white;
+    }
+    .linechart .point--group .internal,
+    .linechart .point--group .label {
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 200ms ease;
+    }
+    .linechart:hover .point--group .internal {
+        opacity: 1;
+    }
+    .linechart.is-active .line {
+        opacity: 0.2;
+    }
+    .linechart.is-active .point--group .internal {
+        opacity: 0.2;
+    }
+    .linechart.is-active .point--group.is-active .internal {
+        opacity: 1;
+    }
+</style>
+<body>
+    <div id="evolution" style="width: 100%; height: 300px;"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    <script src="d3.linechart.js"></script>
+    <script>
+
+    d3.json('population.json', function(data) {
+
+        var evolution = new LineChart(d3.select('#evolution'), data.history, {
+            'keys': ['total', 'men', 'women'],
+            'datefield': 'datetime',
+            'dateformat': '%Q',
+            'ygrid': true,
+            'colors': ['#3161e2','#e0455a', '#a438e2'],
+            'title': 'Población de Málaga',
+            'source': 'Fuente: INE',
+        })
+
+    })
+    </script>
+</body>
+
+
+</html>
