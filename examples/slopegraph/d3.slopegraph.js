@@ -77,13 +77,13 @@ class SlopeGraph {
             this.startl = this.g.append('text')
                 .attr('class', 'label')
                 .attr('text-anchor', 'middle')
-                .attr('y', self.cfg.height + 24)
+                .attr('y', self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom -12)
                 .text(self.cfg.labels[0])
 
             this.endl = this.g.append('text')
                 .attr('class', 'label')
                 .attr('text-anchor', 'middle')
-                .attr('y', self.cfg.height + 24)
+                .attr('y', self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom -12)
                 .text(self.cfg.labels[1])
         }
 
@@ -108,9 +108,11 @@ class SlopeGraph {
         // POINTS
         this.startg = this.lineg.append('g')
             .attr('class', 'point--group point--group__start')
+            .classed('current', function(d){ return d[self.cfg.key] == self.cfg.currentkey })
 
         this.endg = this.lineg.append('g')
             .attr('class', 'point--group point--group__end')
+            .classed('current', function(d){ return d[self.cfg.key] == self.cfg.currentkey })
             .attr('transform', 'translate('+self.cfg.width+',0)')
 
         this.startg.append('circle')
@@ -173,8 +175,10 @@ class SlopeGraph {
         if(self.cfg.source) this.source.attr('transform', 'translate('+ (self.cfg.margin.left) +','+(self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom - 5)+')')
 
         // END-START LABELS
-        if(self.cfg.labels) this.endl.attr('x', self.cfg.width)
-
+        if(self.cfg.labels){
+            this.startl.attr('y', self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom -12)
+            this.endl.attr('x', self.cfg.width).attr('y', self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom -12)
+        }
 
         this.yScale.rangeRound([this.cfg.height, 0]);
 

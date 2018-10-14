@@ -33,7 +33,16 @@
         font-weight: 700;
     }
     /* SLOPEGRAPH */
-
+    .slopegraph .point--group {
+        opacity: 0;
+        transition: opacity 200ms ease;
+    }
+    .slopegraph .point--group.current {
+        opacity: 1;
+    }
+    .slopegraph:hover .point--group {
+        opacity: 1;
+    }
 </style>
 <body>
     <div id="evolution" style="width: 100%; height: 400px;"></div>
