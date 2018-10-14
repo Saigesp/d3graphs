@@ -17,7 +17,7 @@ See examples on https://bl.ocks.org/Saigesp
 
 | Chart | Preview |
 | ------| ------- |
-| [Barchart](examples/barchart/) | ![Barchart](blob/master/examples/barchart/thumbnail.png?raw=true) |
+| [Barchart](examples/barchart/) | ![Barchart](https://github.com/Saigesp/d3graphs/blob/master/examples/barchart/thumbnail.png?raw=true) |
   
 
 
