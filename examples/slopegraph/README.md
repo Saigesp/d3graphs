@@ -2,7 +2,7 @@
 
 D3 implementation of slopegraph
 
-See the [demo](http://bl.ocks.org/Saigesp/ab01821e77d2f1c44e9d71c826e54db6) and more charts from [d3graphs repository](https://github.com/Saigesp/d3graphs)
+See the [demo](http://bl.ocks.org/Saigesp/ae534a5cedfa284086717f1814bafe81) and more charts from [d3graphs repository](https://github.com/Saigesp/d3graphs)
 
 **Features**:
 - Object oriented approach
