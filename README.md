@@ -15,9 +15,17 @@ See examples on https://bl.ocks.org/Saigesp
 
 ## Available charts
 
-| Chart | Preview |
+| Barcharts | Preview |
 | ------| ------- |
-| [Barchart](examples/barchart/) | ![Barchart](https://github.com/Saigesp/d3graphs/blob/master/examples/barchart/thumbnail.png?raw=true) |
+| [Horizontal Barchart](examples/barchart/) | ![Barchart](https://github.com/Saigesp/d3graphs/blob/master/examples/barchart/thumbnail.png?raw=true) |
+| [Stacked Barchart](examples/barchart-stacked/) | ![Stacked barchart](https://github.com/Saigesp/d3graphs/blob/master/examples/barchart-stacked/thumbnail.png?raw=true) |
+| [Calendar](examples/calendar/) | ![Calendar](https://github.com/Saigesp/d3graphs/blob/master/examples/calendar/thumbnail.png?raw=true) |
+| [Linear Calendar](examples/calendar-linear/) | ![Calendar](https://github.com/Saigesp/d3graphs/blob/master/examples/calendar-linear/thumbnail.png?raw=true) |
+| [Multiple Linechart](examples/linechart/) | ![Multiple linechart](https://github.com/Saigesp/d3graphs/blob/master/examples/linechart/thumbnail.png?raw=true) |
+| [Trends Linechart](examples/linechart-trends/) | ![Trends linechar](https://github.com/Saigesp/d3graphs/blob/master/examples/linechart-trends/thumbnail.png?raw=true) |
+| [Piechart](examples/piechart/) | ![Piechart](https://github.com/Saigesp/d3graphs/blob/master/examples/piechart/thumbnail.png?raw=true) |
+| [Slopegraph](examples/slopegraph/) | ![Slopegraph](https://github.com/Saigesp/d3graphs/blob/master/examples/slopegraph/thumbnail.png?raw=true) |
+| [Stripelines](examples/stripelines/) | ![Stripelines](https://github.com/Saigesp/d3graphs/blob/master/examples/stripelines/thumbnail.png?raw=true) |
   
 
 
