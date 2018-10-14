@@ -14,17 +14,15 @@ See all examples on https://bl.ocks.org/Saigesp
 - Some dataviz can require special libraries to work, see examples
 
 ## How to use
-```html
-<div id="chart-container" style="height: 360px;"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-<script src="d3.barchart.js"></script>
-<script>
-    var chart = new BarChart(d3.select('#chart-container'), data, {
-        'key': 'ton',
-        'label': 'year',
-        'color': '#DD8500',
-    })
-</script>
+- Import dependencies
+- Create an object and pass selection, data and options
+
+```javascript
+var chart = new BarChart(d3.select('#chart-container'), data, {
+    'key': 'ton',
+    'label': 'year',
+    'color': '#DD8500',
+})
 ```
 
 ## Available charts
