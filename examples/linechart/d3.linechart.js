@@ -47,6 +47,8 @@ class LineChart {
             .x(function(d){ return self.xScale(d.x); })
             .y(function(d){ return self.yScale(d.y); });
 
+        window.addEventListener("resize", function(){self.resize()});
+
         this.initGraph();
     }
 
@@ -103,19 +105,19 @@ class LineChart {
         }
 
         // AXIS
-        this.g.append("g")
+        this.xAxis = this.g.append("g")
             .attr("class", "axis axis--x")
             .attr("transform", "translate(0," + this.cfg.height + ")")
             .call(d3.axisBottom(self.xScale));
 
-        this.g.append("g")
+        this.yAxis = this.g.append("g")
             .attr("class", "axis axis--y")
             .call(d3.axisLeft(self.yScale)
                 .ticks(3, self.cfg.yscaleformat));
 
         // TITLE
         if(self.cfg.title){
-            this.svg.append('text')
+            this.title = this.svg.append('text')
                 .attr('class', 'title label')
                 .attr('text-anchor', 'middle')
                 .attr('transform', 'translate('+ (self.cfg.width/2) +',20)')
@@ -124,7 +126,7 @@ class LineChart {
 
         // SOURCE
         if(self.cfg.source){
-            this.svg.append('text')
+            this.source = this.svg.append('text')
                 .attr('class', 'source label')
                 .attr('transform', 'translate('+ (self.cfg.margin.left) +','+(self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom - 5)+')')
                 .html(self.cfg.source)
@@ -139,7 +141,7 @@ class LineChart {
                 return "line--group line--group__"+d.key;
             });
 
-        this.lineg.append('path')
+        this.lines = this.lineg.append('path')
             .attr("class", "line")
             .style('stroke', function(d, i){ return self.colorScale(i); })
             .attr("d", function(d) {
@@ -179,7 +181,7 @@ class LineChart {
             gp.append("title")
                 .text(function(d) { return d[k] + ' ' + k});
 
-            self.pointsg.push(gp)
+            self.pointsg.push({selection:gp, key:k })
         })
 
     }
@@ -203,6 +205,78 @@ class LineChart {
     }
 
     resize(){
+        var self = this;
+
+        this.cfg.width = parseInt(this.selection.node().offsetWidth) - this.cfg.margin.left - this.cfg.margin.right;
+        this.cfg.height = parseInt(this.selection.node().offsetHeight)- this.cfg.margin.top - this.cfg.margin.bottom;
+
+        this.xScale.rangeRound([0, this.cfg.width]);
+        this.yScale.rangeRound([this.cfg.height,  0]);
+
+        this.svg
+            .attr("viewBox", "0 0 "+(this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)+" "+(this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom))
+            .attr("width", this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)
+            .attr("height", this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom);
+
+        // GRIDLINES
+        if(this.cfg.xgrid){
+            this.xGrid.call(self.make_x_gridlines()
+                .tickSize(self.cfg.height)
+                .tickFormat(""))
+        }
+
+        if(this.cfg.ygrid){
+            this.yGrid.call(self.make_y_gridlines()
+                .tickSize(-self.cfg.width)
+                .tickFormat("")
+                .ticks(3, self.cfg.yscaleformat));
+        }
+
+        // AXIS
+        this.xAxis.attr("transform", "translate(0," + this.cfg.height + ")")
+            .call(d3.axisBottom(self.xScale));
+
+        this.yAxis.call(d3.axisLeft(self.yScale)
+            .ticks(3, self.cfg.yscaleformat));
+
+        // TITLE
+        if(self.cfg.title) this.title.attr('transform', 'translate('+ (self.cfg.width/2) +',20)')
+        
+        // SOURCE
+        if(self.cfg.source) this.source.attr('transform', 'translate('+ (self.cfg.margin.left) +','+(self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom - 5)+')')
+
+        // LINES
+        this.line = d3.line()
+            .x(function(d){ return self.xScale(d.x); })
+            .y(function(d){ return self.yScale(d.y); });
+
+        this.lines.attr("d", function(d) {
+                return self.line(d.values);
+            });
+
+        // POINTS
+        this.pointsg.forEach(function(p, i){
+            p.selection.attr('transform', function(d){ return 'translate('+self.xScale(d.jsdate)+','+self.yScale(d[p.key])+')'; })
+        })
+/*
+
+        this.itemg.attr('transform', function(d, i){
+            return 'translate('+ self.xScale(d[self.cfg.label]) +',0)';
+        })
+
+        this.rects.attr('width', this.xScale.bandwidth())
+            .attr('y', function(d, i){
+                return self.yScale(+d[self.cfg.key]);
+            })
+            .attr('height', function(d){
+                return self.cfg.height - self.yScale(+d[self.cfg.key]);
+            })
+
+        if(self.cfg.title) this.title.attr('transform', 'translate('+ (self.cfg.width/2) +',20)')
+    
+        // SOURCE
+        if(self.cfg.source) this.source.attr('transform', 'translate('+ (self.cfg.margin.left) +','+(self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom - 5)+')')
+*/
     }
 
 };

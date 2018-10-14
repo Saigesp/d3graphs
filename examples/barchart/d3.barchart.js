@@ -153,7 +153,6 @@ class BarChart{
 
         if(self.cfg.title) this.title.attr('transform', 'translate('+ (self.cfg.width/2) +',20)')
     
-
         // SOURCE
         if(self.cfg.source) this.source.attr('transform', 'translate('+ (self.cfg.margin.left) +','+(self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom - 5)+')')
 
