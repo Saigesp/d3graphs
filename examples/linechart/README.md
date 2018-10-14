@@ -2,6 +2,8 @@
 
 D3 implementation of multiple linechar
 
+See the [demo](http://bl.ocks.org/Saigesp/13029d084201f5012391e231215961f0) and more charts from [d3graphs repository](https://github.com/Saigesp/d3graphs)
+
 **Features**:
 - Object oriented approach
 - Responsive
