@@ -3,15 +3,25 @@ Personal d3js visualizations codebase. **Currently in development**
 
 See examples on https://bl.ocks.org/Saigesp
 
-## Features
+**Features**
 - Graphs are made as javascript classes, so they can be reused and configured.
+- Graphs are responsive and resizable.
+- Graphs allow data update.
 
-## Dependencies
-- D3v4
+**Dependencies**
+- D3 version 4.0 or higher
 - Maps are built with Mapbox and Leaflet
-- Some dataviz requires d3-scale-chromatic
+- Some dataviz can require special libraries to work, see examples
 
-## Examples development
+## Available charts
+
+| Chart | Preview |
+| ------| ------- |
+| [Barchart](examples/barchart/) | ![Barchart](blob/master/examples/barchart/thumbnail.png?raw=true) |
+  
+
+
+## Development
 
 - Requires git with SSH
 
