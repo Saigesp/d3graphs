@@ -74,10 +74,7 @@ class LineChart {
 
         // SVG
         this.svg = this.selection.append('svg')
-            .attr("class", "chart linechart")
-            .attr("viewBox", "0 0 "+(this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)+" "+(this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom))
-            .attr("width", this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)
-            .attr("height", this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom);
+            .attr("class", "chart linechart");
 
         this.g = this.svg.append("g")
             .attr("transform", "translate(" + (self.cfg.margin.left) + "," + (self.cfg.margin.top) + ")");
