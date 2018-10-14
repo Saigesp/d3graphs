@@ -2,15 +2,15 @@
 
 D3 implementation of horizontal barchar
 
-See the [demo](http://bl.ocks.org/Saigesp/f906ae2bab36f03a59c78e8d669aa68c)
-
-See more charts on [d3graphs repository](https://github.com/Saigesp/d3graphs)
-
+See the [demo](http://bl.ocks.org/Saigesp/f906ae2bab36f03a59c78e8d669aa68c) and more charts from [d3graphs repository](https://github.com/Saigesp/d3graphs)
 
 **Features**:
 - Object oriented approach
 - Responsive
 - Resizable
+
+**Requires**:
+- D3 v4+
 
 **Default options**:
 ```javascript
