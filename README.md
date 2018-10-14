@@ -27,7 +27,7 @@ var chart = new BarChart(d3.select('#chart-container'), data, {
 
 ## Available charts
 
-| Chart | Block | Preview |
+| Chart | Demo | Preview |
 | ------| ------- | ------ |
 | [Horizontal Barchart](examples/barchart/) | [f906ae2bab36f03a59c78e8d669aa68c](http://bl.ocks.org/Saigesp/f906ae2bab36f03a59c78e8d669aa68c) | ![Barchart](https://github.com/Saigesp/d3graphs/blob/master/examples/barchart/thumbnail.png?raw=true) |
 | [Stacked Barchart](examples/barchart-stacked/) | [f2605e92dff3a976d97ae6027d07f6b5](https://bl.ocks.org/Saigesp/f2605e92dff3a976d97ae6027d07f6b5) | ![Stacked barchart](https://github.com/Saigesp/d3graphs/blob/master/examples/barchart-stacked/thumbnail.png?raw=true) |
