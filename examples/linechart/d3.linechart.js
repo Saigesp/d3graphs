@@ -58,8 +58,10 @@ class LineChart {
             self.dataT[i]['values'] = []
         });
 
+        this.data.forEach(function(d){ d.jsdate = self.parseTime(d[self.cfg.datefield]); });
+        this.data.sort(function(a,b){return b.jsdate - a.jsdate })
+
         this.data.forEach(function(d){
-            d.jsdate = self.parseTime(d[self.cfg.datefield]);
             d.min =  9999999999;
             d.max = -9999999999;
             self.cfg.keys.forEach(function(j, i){
@@ -74,7 +76,10 @@ class LineChart {
 
         // SVG
         this.svg = this.selection.append('svg')
-            .attr("class", "chart linechart");
+            .attr("class", "chart linechart")
+            .attr("viewBox", "0 0 "+(this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)+" "+(this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom))
+            .attr("width", this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)
+            .attr("height", this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom);
 
         this.g = this.svg.append("g")
             .attr("transform", "translate(" + (self.cfg.margin.left) + "," + (self.cfg.margin.top) + ")");
