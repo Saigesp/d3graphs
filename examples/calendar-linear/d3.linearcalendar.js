@@ -19,10 +19,6 @@ class LinearCalendar{
             'radius': 3,
             'stroke': 2,
         };
-
-        this.cfg.width = parseInt(this.selection.node().offsetWidth) - this.cfg.margin.left - this.cfg.margin.right,
-        this.cfg.height = parseInt(this.selection.node().offsetHeight)- this.cfg.margin.top - this.cfg.margin.bottom;
-
         Object.keys(config).forEach(function(key) {
             if(config[key] instanceof Object && config[key] instanceof Array === false){
                 Object.keys(config[key]).forEach(function(sk) {
@@ -30,6 +26,9 @@ class LinearCalendar{
                 });
             } else self.cfg[key] = config[key];
         });
+
+        this.cfg.width = parseInt(this.selection.node().offsetWidth) - this.cfg.margin.left - this.cfg.margin.right,
+        this.cfg.height = parseInt(this.selection.node().offsetHeight)- this.cfg.margin.top - this.cfg.margin.bottom;
 
         this.parseTime = d3.timeParse(this.cfg.dateformat);
         this.formatTime = d3.timeFormat(this.cfg.dateformat);

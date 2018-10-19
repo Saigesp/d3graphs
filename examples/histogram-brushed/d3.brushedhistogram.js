@@ -16,9 +16,6 @@ class BrushedHistogram {
             'sliderradius': 8,
             'sliderwidth': 5,
         };
-        this.cfg.width = parseInt(this.selection.node().offsetWidth) - this.cfg.margin.left - this.cfg.margin.right,
-        this.cfg.height = parseInt(this.selection.node().offsetHeight)- this.cfg.margin.top - this.cfg.margin.bottom;
-
         Object.keys(config).forEach(function(key) {
             if(config[key] instanceof Object && config[key] instanceof Array === false){
                 Object.keys(config[key]).forEach(function(sk) {
@@ -26,6 +23,9 @@ class BrushedHistogram {
                 });
             } else self.cfg[key] = config[key];
         });
+
+        this.cfg.width = parseInt(this.selection.node().offsetWidth) - this.cfg.margin.left - this.cfg.margin.right,
+        this.cfg.height = parseInt(this.selection.node().offsetHeight)- this.cfg.margin.top - this.cfg.margin.bottom;
 
         this.xScale = d3.scaleLinear()
             .range([0, this.cfg.width]);

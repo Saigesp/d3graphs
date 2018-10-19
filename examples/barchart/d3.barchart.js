@@ -14,10 +14,6 @@ class BarChart{
             'title': false,
             'source': false,
         };
-
-        this.cfg.width = parseInt(this.selection.node().offsetWidth) - this.cfg.margin.left - this.cfg.margin.right,
-        this.cfg.height = parseInt(this.selection.node().offsetHeight)- this.cfg.margin.top - this.cfg.margin.bottom;
-
         Object.keys(config).forEach(function(key) {
             if(config[key] instanceof Object && config[key] instanceof Array === false){
                 Object.keys(config[key]).forEach(function(sk) {
@@ -25,6 +21,9 @@ class BarChart{
                 });
             } else self.cfg[key] = config[key];
         });
+
+        this.cfg.width = parseInt(this.selection.node().offsetWidth) - this.cfg.margin.left - this.cfg.margin.right,
+        this.cfg.height = parseInt(this.selection.node().offsetHeight)- this.cfg.margin.top - this.cfg.margin.bottom;
 
         this.xScale = d3.scaleBand().rangeRound([0, this.cfg.width]).padding(0.1);
         this.yScale = d3.scaleLinear().rangeRound([0, self.cfg.height]);
