@@ -102,7 +102,10 @@ class BarChart{
             .attr('height', function(d){
                 return self.cfg.height - self.yScale(+d[self.cfg.key]);
             })
-            .attr('fill', self.cfg.color)
+            .attr('fill', self.cfg.color);
+
+        this.rects.append("title")
+            .text(function(d) { return d[self.cfg.key]});
 
     }
 
