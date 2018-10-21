@@ -30,7 +30,7 @@ var chart = new BarChart(d3.select('#chart-container'), data, {
 | Chart | Demo | Preview |
 | ------| ------- | ------ |
 | [Horizontal Barchart](examples/barchart/) | [f906ae2bab36f03a59c78e8d669aa68c](http://bl.ocks.org/Saigesp/f906ae2bab36f03a59c78e8d669aa68c) | ![Barchart](https://github.com/Saigesp/d3graphs/blob/master/examples/barchart/thumbnail.png?raw=true) |
-| [Mean Barchart](examples/barchart/) | [4ab7848d451694667830d91712759cc5](http://bl.ocks.org/Saigesp/4ab7848d451694667830d91712759cc5) | ![MeanBarchart](https://github.com/Saigesp/d3graphs/blob/master/examples/barchart-mean/thumbnail.png?raw=true) |
+| [Mean Barchart](examples/barchart-mean/) | [4ab7848d451694667830d91712759cc5](http://bl.ocks.org/Saigesp/4ab7848d451694667830d91712759cc5) | ![MeanBarchart](https://github.com/Saigesp/d3graphs/blob/master/examples/barchart-mean/thumbnail.png?raw=true) |
 | [Stacked Barchart](examples/barchart-stacked/) | [f2605e92dff3a976d97ae6027d07f6b5](https://bl.ocks.org/Saigesp/f2605e92dff3a976d97ae6027d07f6b5) | ![Stacked barchart](https://github.com/Saigesp/d3graphs/blob/master/examples/barchart-stacked/thumbnail.png?raw=true) |
 | [Calendar](examples/calendar/) | [0b0995536ec3e691cec6725783870a70](https://bl.ocks.org/Saigesp/0b0995536ec3e691cec6725783870a70) | ![Calendar](https://github.com/Saigesp/d3graphs/blob/master/examples/calendar/thumbnail.png?raw=true) |
 | [Linear Calendar](examples/calendar-linear/) | [a0b505c3d0e42cfbdf39b0d2c19ada0c](https://bl.ocks.org/Saigesp/a0b505c3d0e42cfbdf39b0d2c19ada0c) | ![Calendar](https://github.com/Saigesp/d3graphs/blob/master/examples/calendar-linear/thumbnail.png?raw=true) |
