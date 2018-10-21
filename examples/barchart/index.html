@@ -25,6 +25,10 @@
     .chart .title {
         font-weight: 700;
     }
+    /* BARCHART */
+    .chart .axis--mean {
+        shape-rendering: crispEdges;
+    }
 </style>
 <body>
     <div id="exports" style="width: 100%; height: 360px;"></div>
@@ -35,6 +39,8 @@
             var grafico = new BarChart(d3.select('#exports'), data, {
                 'key': 'ton',
                 'label': 'year',
+                'mean': 28000,
+                'meanlabel': 'Media predefinida',
                 'color': '#DD8500',
                 'title': 'Exportaciones de clementinas a EEUU',
                 'source': 'Fuente: <a href="https://www.icex.es/icex/GetDocumento?dDocName=DOC2015504468&urlNoAcceso=/icex/es/registro/iniciar-sesion/index.html?urlDestino=http://www.icex.es/icex/es/navegacion-principal/todos-nuestros-servicios/informacion-de-mercados/sectores/agroalimentarios/documentos/DOC2015504468.html">Instituto Español de comercio Exterior</a>',

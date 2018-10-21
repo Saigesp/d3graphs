@@ -7,16 +7,16 @@ class StackedBarChart {
 
         // Graph configuration
         this.cfg = {
-            'margin': {'top': 10, 'right': 10, 'bottom': 10, 'left': 40},
-            'key': 'key',
-            'currentkey':'*',
-            'keys': [],
-            'colors': [],
-            'labels': true,
-            'fontsize': '12px',
-            'greyColorStart': 240,
-            'greyColorStep': 15,
-            'label_space': 150,
+            margin: {top: 10, right: 10, bottom: 10, left: 40},
+            key: 'key',
+            keys: [],
+            colors: [],
+            labels: true,
+            fontsize: '12px',
+            greyColorStart: 240,
+            greyColorStep: 15,
+            label_space: 150,
+            currentkey:false,
         };
         Object.keys(config).forEach(function(key) {
             if(config[key] instanceof Object && config[key] instanceof Array === false){
@@ -106,7 +106,7 @@ class StackedBarChart {
                 })
                 .attr('fill', function(d){
                     var greyColor = self.cfg.greyColorMin + (self.cfg.greyColorStep*n);
-                    return d.name == self.cfg.currentkey || self.cfg.currentkey == '*' ? self.cfg.colors[n] : 'rgb('+greyColor+','+greyColor+','+greyColor+')'})
+                    return d.name == !self.cfg.currentkey || self.cfg.currentkey ? self.cfg.colors[n] : 'rgb('+greyColor+','+greyColor+','+greyColor+')'})
         })
 
         if(this.cfg.labels){

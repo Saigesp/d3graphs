@@ -11,9 +11,12 @@ class BarChart{
             key: 'key',
             label: 'date',
             color: 'steelblue',
+            greycolor: '#CCC',
+            currentkey: false,
             title: false,
             source: false,
             mean: false,
+            meanlabel: false,
         };
 
         Object.keys(config).forEach(function(key) {
@@ -103,20 +106,31 @@ class BarChart{
             .attr('height', function(d){
                 return self.cfg.height - self.yScale(+d[self.cfg.key]);
             })
-            .attr('fill', self.cfg.color);
+            .attr('fill', function(d){
+                return !self.cfg.currentkey || d[self.cfg.key] == self.cfg.currentkey ? self.cfg.color : self.cfg.greycolor;
+            });
 
         this.rects.append("title")
             .text(function(d) { return d[self.cfg.key]});
 
         if(this.cfg.mean){
             this.mean = this.g.append('line')
-                .attr('class', 'line line--mean')
+                .attr('class', 'axis axis--mean')
                 .attr('stroke', 'black')
                 .attr('stroke-width', 1)
                 .attr('x1', 0)
                 .attr('y1', this.yScale(this.cfg.mean))
                 .attr('x2', this.cfg.width)
                 .attr('y2', this.yScale(this.cfg.mean))
+
+            if(this.cfg.meanlabel){
+                this.meanlabel = this.g.append('text')
+                    .attr('class', 'label label--mean')
+                    .attr('text-anchor', 'end')
+                    .attr('x', this.cfg.width)
+                    .attr('y', this.yScale(this.cfg.mean) - 3)
+                    .text(this.cfg.meanlabel)
+            }
         }
 
     }
@@ -170,6 +184,9 @@ class BarChart{
             this.mean.attr('y1', this.yScale(self.cfg.mean))
                 .attr('x2', self.cfg.width)
                 .attr('y2', self.yScale(self.cfg.mean))
+
+            if(this.cfg.meanlabel) this.meanlabel.attr('x', this.cfg.width).attr('y', this.yScale(this.cfg.mean) - 3)
+
         }
 
         if(self.cfg.title) this.title.attr('transform', 'translate('+ (self.cfg.width/2) +',20)')
