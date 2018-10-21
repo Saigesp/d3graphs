@@ -2,7 +2,7 @@
 
 D3 implementation of mean barchar
 
-See the XXX and more charts from [d3graphs repository](https://github.com/Saigesp/d3graphs)
+See the [demo](http://bl.ocks.org/Saigesp/4ab7848d451694667830d91712759cc5) and more charts from [d3graphs repository](https://github.com/Saigesp/d3graphs)
 
 **Features**:
 - Object oriented approach
