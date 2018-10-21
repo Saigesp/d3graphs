@@ -7,13 +7,15 @@ class BarChart{
 
         // Graph configuration
         this.cfg = {
-            'margin': {'top': 40, 'right': 30, 'bottom': 50, 'left': 40},
-            'key': 'key',
-            'label': 'date',
-            'color': 'steelblue',
-            'title': false,
-            'source': false,
+            margin: {top: 40, right: 30, bottom: 50, left: 40},
+            key: 'key',
+            label: 'date',
+            color: 'steelblue',
+            title: false,
+            source: false,
+            mean: false,
         };
+
         Object.keys(config).forEach(function(key) {
             if(config[key] instanceof Object && config[key] instanceof Array === false){
                 Object.keys(config[key]).forEach(function(sk) {
@@ -40,7 +42,7 @@ class BarChart{
 
         this.svg = this.selection.append('svg')
             .attr("class", "chart barchart")
-            .attr("viewBox", "0 0 "+(this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)+" "+(this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom))
+            //.attr("viewBox", "0 0 "+(this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)+" "+(this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom))
             .attr("width", this.cfg.width + this.cfg.margin.left + this.cfg.margin.right)
             .attr("height", this.cfg.height + this.cfg.margin.top + this.cfg.margin.bottom);
 
@@ -106,6 +108,17 @@ class BarChart{
         this.rects.append("title")
             .text(function(d) { return d[self.cfg.key]});
 
+        if(this.cfg.mean){
+            this.mean = this.g.append('line')
+                .attr('class', 'line line--mean')
+                .attr('stroke', 'black')
+                .attr('stroke-width', 1)
+                .attr('x1', 0)
+                .attr('y1', this.yScale(this.cfg.mean))
+                .attr('x2', this.cfg.width)
+                .attr('y2', this.yScale(this.cfg.mean))
+        }
+
     }
 
     // gridlines in x axis function
@@ -153,9 +166,13 @@ class BarChart{
                 return self.cfg.height - self.yScale(+d[self.cfg.key]);
             })
 
+        if(this.cfg.mean){
+            this.mean.attr('y1', this.yScale(self.cfg.mean))
+                .attr('x2', self.cfg.width)
+                .attr('y2', self.yScale(self.cfg.mean))
+        }
+
         if(self.cfg.title) this.title.attr('transform', 'translate('+ (self.cfg.width/2) +',20)')
-    
-        // SOURCE
         if(self.cfg.source) this.source.attr('transform', 'translate('+ (self.cfg.margin.left) +','+(self.cfg.height + self.cfg.margin.top + self.cfg.margin.bottom - 5)+')')
 
     }
