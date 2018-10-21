@@ -15,15 +15,15 @@ See the [demo](http://bl.ocks.org/Saigesp/f2605e92dff3a976d97ae6027d07f6b5) and 
 **Default options**:
 ```javascript
 {
-    'margin': {'top': 10, 'right': 10, 'bottom': 10, 'left': 40},
-    'key': 'key',
-    'currentkey':'*',
-    'keys': [],
-    'colors': [],
-    'labels': true,
-    'fontsize': '12px',
-    'greyColorStart': 240,
-    'greyColorStep': 15,
-    'label_space': 150,
+    margin: {top: 10, right: 10, bottom: 10, left: 40},
+    key: 'key',
+    keys: [],
+    colors: [],
+    labels: true,
+    fontsize: '12px',
+    greyColorStart: 240,
+    greyColorStep: 15,
+    label_space: 150,
+    currentkey: false,
 }
 ```

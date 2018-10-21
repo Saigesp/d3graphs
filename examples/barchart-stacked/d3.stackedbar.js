@@ -16,7 +16,7 @@ class StackedBarChart {
             greyColorStart: 240,
             greyColorStep: 15,
             label_space: 150,
-            currentkey:false,
+            currentkey: false,
         };
         Object.keys(config).forEach(function(key) {
             if(config[key] instanceof Object && config[key] instanceof Array === false){
