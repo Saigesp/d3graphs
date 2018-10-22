@@ -35,6 +35,7 @@
 
         var stacked = new StackedBarChart(d3.select('#bars'), data.properties.cities, {
             'key': 'name',
+            'yscaleformat': '.0s',
             'currentkey':'*',
             'keys': ['airbnb_totals', 'homeaw_totals', 'houset_totals', 'onlyap_totals'],
             'colors': ['#FF5F6B', '#2E87E3', '#88C8F3', '#4CAF50'],

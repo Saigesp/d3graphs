@@ -21,6 +21,7 @@ See the [demo](http://bl.ocks.org/Saigesp/f2605e92dff3a976d97ae6027d07f6b5) and 
     colors: [],
     labels: true,
     fontsize: '12px',
+    yscaleformat: '.0f',
     greyColorStart: 240,
     greyColorStep: 15,
     label_space: 150,

@@ -12,6 +12,7 @@ class MeanBarChart{
             label: 'date',
             colors: ['#95bd95', '#db8c8c'],
             greycolor: '#CCC',
+            yscaleformat: '.0f',
             currentkey: false,
             title: false,
             source: false,
@@ -74,7 +75,7 @@ class MeanBarChart{
             .attr("class", "grid grid--y")
             .call(self.make_y_gridlines()
                 .tickSize(-self.cfg.width)
-                .tickFormat(d3.format("d")));
+                .ticks(5, self.cfg.yscaleformat));
 
         this.itemg = this.g.selectAll('.itemgroup')
             .data(this.data)

@@ -13,6 +13,7 @@ class StackedBarChart {
             colors: [],
             labels: true,
             fontsize: '12px',
+            yscaleformat: '.0f',
             greyColorStart: 240,
             greyColorStep: 15,
             label_space: 150,
@@ -74,12 +75,12 @@ class StackedBarChart {
             .call(self.make_y_gridlines()
                 .tickSize(-this.cfg.width)
                 .tickFormat("")
-                .ticks(3, ".0f"));
+                .ticks(3, self.cfg.yscaleformat));
 
         this.g.append("g")
             .attr("class", "axis axis--y")
             .call(d3.axisLeft(self.yAScale)
-                .ticks(3, ".0f"));
+                .ticks(3, self.cfg.yscaleformat));
 
         this.itemg = this.g.selectAll('.itemg')
             .data(this.data)
@@ -156,7 +157,7 @@ class StackedBarChart {
         this.yGrid.call(self.make_y_gridlines()
             .tickSize(-this.cfg.width)
             .tickFormat("")
-            .ticks(3, ".0f"))
+            .ticks(3, self.cfg.yscaleformat))
 
     }
 
