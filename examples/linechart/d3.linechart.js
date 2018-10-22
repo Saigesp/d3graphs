@@ -7,20 +7,23 @@ class LineChart {
 
         // Graph configuration
         this.cfg = {
-            'margin': {'top': 40, 'right': 20, 'bottom': 40, 'left': 40},
-            'keys': [],
-            'colors': ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'],
-            'fontsize': '12px',
-            'xgrid': false,
-            'ygrid': false,
-            'yscaleformat': '.0f',
-            'datefield': 'date',
-            'dateformat': '%Y-%m-%d', // https://github.com/d3/d3-time-format/blob/master/README.md#locale_format
-            'internalR': 4,
-            'externalR': 12,
-            'title': false,
-            'source': false,
+            margin: {top: 40, right: 20, bottom: 40, left: 40},
+            keys: [],
+            colors: ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'],
+            greycolor: 'rgba(120,120,120,0.3)',
+            fontsize: '12px',
+            xgrid: false,
+            ygrid: false,
+            yscaleformat: '.0f',
+            datefield: 'date',
+            dateformat: '%Y-%m-%d', // https://github.com/d3/d3-time-format/blob/master/README.md#locale_format
+            internalR: 4,
+            externalR: 12,
+            currentkey: false,
+            title: false,
+            source: false,
         };
+
         Object.keys(config).forEach(function(key) {
             if(config[key] instanceof Object && config[key] instanceof Array === false){
                 Object.keys(config[key]).forEach(function(sk) {
@@ -107,7 +110,9 @@ class LineChart {
 
         this.lines = this.lineg.append('path')
             .attr("class", "line")
-            .style('stroke', function(d, i){ return self.colorScale(i); })
+            .style('stroke', function(d, i){
+                return !self.cfg.currentkey || d.key == self.cfg.currentkey ? self.colorScale(i) : self.cfg.greycolor;
+            })
 
         // POINTS
         this.pointsg = []
@@ -132,7 +137,7 @@ class LineChart {
             gp.append('circle')
                 .attr('class', 'internal')
                 .attr('fill', function(){
-                    return self.colorScale(i)
+                    return !self.cfg.currentkey || k == self.cfg.currentkey ? self.colorScale(i) : self.cfg.greycolor;
                 })
                 .attr('r', self.cfg.internalR)
 
