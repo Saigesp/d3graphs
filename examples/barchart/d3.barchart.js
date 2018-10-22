@@ -107,7 +107,7 @@ class BarChart{
                 return self.cfg.height - self.yScale(+d[self.cfg.key]);
             })
             .attr('fill', function(d){
-                return !self.cfg.currentkey || d[self.cfg.key] == self.cfg.currentkey ? self.cfg.color : self.cfg.greycolor;
+                return !self.cfg.currentkey || d[self.cfg.label] == self.cfg.currentkey ? self.cfg.color : self.cfg.greycolor;
             });
 
         this.rects.append("title")
