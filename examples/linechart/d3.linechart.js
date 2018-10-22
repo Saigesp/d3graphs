@@ -175,7 +175,6 @@ class LineChart {
         if(this.cfg.ygrid){
             this.yGrid.call(self.make_y_gridlines()
                 .tickSize(-self.cfg.width)
-                .tickFormat("")
                 .ticks(3, self.cfg.yscaleformat));
         }
 

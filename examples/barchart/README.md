@@ -20,6 +20,7 @@ See the [demo](http://bl.ocks.org/Saigesp/f906ae2bab36f03a59c78e8d669aa68c) and 
     label: 'date',
     color: 'steelblue',
     greycolor: '#CCC',
+    yscaleformat: '.0f',
     currentkey: false,
     title: false,
     source: false,

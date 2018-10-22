@@ -12,6 +12,7 @@ class BarChart{
             label: 'date',
             color: 'steelblue',
             greycolor: '#CCC',
+            yscaleformat: '.0f',
             currentkey: false,
             title: false,
             source: false,
@@ -75,7 +76,7 @@ class BarChart{
             .attr("class", "grid grid--y")
             .call(self.make_y_gridlines()
                 .tickSize(-self.cfg.width)
-                .tickFormat(d3.format("d")));
+                .ticks(3, self.cfg.yscaleformat));
 
         // AXIS
         this.xAxis = this.g.append("g")
