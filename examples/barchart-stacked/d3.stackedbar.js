@@ -107,7 +107,10 @@ class StackedBarChart {
                 })
                 .attr('fill', function(d){
                     var greyColor = self.cfg.greyColorMin + (self.cfg.greyColorStep*n);
-                    return d.name == !self.cfg.currentkey || self.cfg.currentkey ? self.cfg.colors[n] : 'rgb('+greyColor+','+greyColor+','+greyColor+')'})
+                    return d.name == self.cfg.currentkey || self.cfg.currentkey == '*' ? self.cfg.colors[n] : 'rgb('+greyColor+','+greyColor+','+greyColor+')'
+                })
+                .append("title")
+                   .text(function(d) { return d[provider]});
         })
 
         if(this.cfg.labels){
