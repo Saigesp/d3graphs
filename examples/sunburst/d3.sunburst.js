@@ -29,24 +29,38 @@ class SunBurst{
 
         let radius = Math.min(this.cfg.width, this.cfg.height)/2;
 
-        const xScale = d3.scaleLinear()
+        this.xScale = d3.scaleLinear()
             .range([0, 2 * Math.PI])
             .clamp(true);
 
-        const yScale = d3.scaleSqrt()
+        this.yScale = d3.scaleSqrt()
             .range([radius*.1, radius]);
 
         this.arc = d3.arc()
-            .startAngle(function(d){ return xScale(d.x0)})
-            .endAngle(function(d){ return xScale(d.x1)})
-            .innerRadius(function(d){ return Math.max(0, yScale(d.y0))})
-            .outerRadius(function(d){ return Math.max(0, yScale(d.y1))});
+            .startAngle(function(d){ return self.xScale(d.x0)})
+            .endAngle(function(d){ return self.xScale(d.x1)})
+            .innerRadius(function(d){ return Math.max(0, self.yScale(d.y0))})
+            .outerRadius(function(d){ return Math.max(0, self.yScale(d.y1))});
+
+        this.middleArcLine = function(d){
+            let angles = [self.xScale(d.x0) - (Math.PI/2), self.xScale(d.x1) - (Math.PI/2)];
+            let r = Math.max(0, (self.yScale(d.y0) + self.yScale(d.y1)) / 2);
+
+            const middleAngle = (angles[1] + angles[0]) / 2;
+            const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
+            if (invertDirection) { angles.reverse(); }
+
+            const path = d3.path();
+            path.arc(0, 0, r, angles[0], angles[1], invertDirection);
+            return path.toString();
+        }
 
         this.initGraph();
     }
 
     initGraph() {
         let self = this;
+
 
 
         this.svg = this.selection.append('svg')
@@ -60,6 +74,8 @@ class SunBurst{
 
         this.cg = this.g.append("g")
             .attr("transform", "translate(" + (self.cfg.width/2) + "," + (self.cfg.height/2) + ")");
+
+
 
 
         let partition = d3.partition();
@@ -93,11 +109,12 @@ class SunBurst{
                 return 'steelblue';
             })
             .attr('d', this.arc);
-/*
+
         newSlice.append('path')
             .attr('class', 'hidden-arc')
-            .attr('id', (_, i) => `hiddenArc${i}`)
-            .attr('d', middleArcLine);
-*/
+            .attr('fill', 'transparent')
+            //.attr('id', (_, i) => `hiddenArc${i}`)
+            .attr('d', this.middleArcLine);
+
     }
 }
