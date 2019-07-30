@@ -36,6 +36,8 @@ class SunBurst{
         this.yScale = d3.scaleSqrt()
             .range([radius*.1, radius]);
 
+        this.colorScale = d3.scaleOrdinal(d3.schemeCategory20);
+
         this.arc = d3.arc()
             .startAngle(function(d){ return self.xScale(d.x0)})
             .endAngle(function(d){ return self.xScale(d.x1)})
@@ -95,7 +97,7 @@ class SunBurst{
             .append('g').attr('class', 'slice')
             .on('click', d => {
                 d3.event.stopPropagation();
-                //focusOn(d);
+                self.focusOn(d);
             });
 
         newSlice.append('title')
@@ -106,15 +108,87 @@ class SunBurst{
         newSlice.append('path')
             .attr('class', 'main-arc')
             .style('fill', function(d){
-                return 'steelblue';
+                return self.colorScale((d.children ? d : d.parent).data.name)
             })
             .attr('d', this.arc);
 
         newSlice.append('path')
             .attr('class', 'hidden-arc')
             .attr('fill', 'transparent')
-            //.attr('id', (_, i) => `hiddenArc${i}`)
+            .attr('id', function(d, i){
+                return "hiddenArc-"+i;
+            })
             .attr('d', this.middleArcLine);
 
+        let text = newSlice.append('text')
+            .attr('display', function(d){
+                return self.textFits(d) ? 'unset' : 'none';
+            })
+            .attr('text-anchor', 'middle')
+            .append('textPath')
+            .attr('startOffset','50%')
+            .attr('xlink:href', function(d, i){
+                return "#hiddenArc-"+i;
+            })
+            .text(function(d){
+                return d.data.name;
+            });
+    }
+
+    textFits(d) {
+        let CHAR_SPACE = 6;
+        let deltaAngle = this.xScale(d.x1) - this.xScale(d.x0);
+        let r = Math.max(0, (this.yScale(d.y0) + this.yScale(d.y1)) / 2);
+        return d.data.name.length * CHAR_SPACE < r * deltaAngle;
+    }
+
+    focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
+        var self = this;
+        let transition = this.svg.transition()
+            .duration(750)
+            .tween('scale', function() {
+                let xd = d3.interpolate(self.xScale.domain(), [d.x0, d.x1]);
+                let yd = d3.interpolate(self.yScale.domain(), [d.y0, 1]);
+                return function(t){
+                    return self.xScale.domain(xd(t)); self.yScale.domain(yd(t));
+                };
+            });
+
+        transition.selectAll('path.main-arc')
+            .attrTween('d', function(d){
+                return function(){
+                    return self.arc(d);
+                }
+            });
+
+        transition.selectAll('path.hidden-arc')
+            .attrTween('d', function(d){
+                return function(){
+                    return self.middleArcLine(d)
+                }
+            });
+
+        transition.selectAll('text')
+            .attrTween('display', function(d){
+                return function(){
+                    return self.textFits(d) ? 'unset' : 'none';
+                }
+            });
+
+        this.moveStackToFront(d);
+    }
+
+    moveStackToFront(g) {
+        console.log('moveStackToFront');
+        var self = this;
+        this.svg.selectAll('.slice').filter(function(d){
+            return d === g;
+        })
+        .each(function(d) {
+            this.parentNode.appendChild(this);
+            if (d.parent) {
+                self.moveStackToFront(d.parent);
+            }
+        })
     }
 }
